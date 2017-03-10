@@ -54,7 +54,6 @@ class Pouring(capacity: Vector[Int]) {
 			  val more = for {
 				  path <- paths
 				  next <- moves.map(x=>path.extend(x))
-//				  next <- moves.map(path.extend)
 				  if !(explored.contains(next.endState))
 			  } yield next
 				paths #:: from(more, explored ++ (more.map(x => x.endState)))

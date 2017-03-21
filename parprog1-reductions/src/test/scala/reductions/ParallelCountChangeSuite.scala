@@ -63,5 +63,24 @@ class ParallelCountChangeSuite extends FunSuite {
     check(250, List(1, 2, 5, 10, 20, 50), 177863)
   }
 
+  test("parCountChange should return 0 for money < 0") {
+    def check(money: Int, coins: List[Int]) = 
+      assert(parCountChange(money, coins, ParallelCountChange.moneyThreshold(0)) == 0,
+        s"countChang($money, _) should be 0")
 
+    check(-1, List())
+    check(-1, List(1, 2, 3))
+    check(-Int.MinValue, List())
+    check(-Int.MinValue, List(1, 2, 3))
+  }
+  
+  test("parCountChange should work for multi-coins") {
+    def check(money: Int, coins: List[Int], expected: Int) =
+      assert(parCountChange(money, coins, ParallelCountChange.moneyThreshold(money)) == expected,
+        s"countChange($money, $coins) should be $expected")
+
+    check(50, List(1, 2, 5, 10), 341)
+    check(250, List(1, 2, 5, 10, 20, 50), 177863)
+  }
+  
 }

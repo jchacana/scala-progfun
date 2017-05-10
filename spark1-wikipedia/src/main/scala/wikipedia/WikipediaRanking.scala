@@ -24,6 +24,7 @@ object WikipediaRanking {
   val conf: SparkConf = new SparkConf().setMaster("local")
   val sc: SparkContext = new SparkContext("local", "wikipedia", conf)
   // Hint: use a combination of `sc.textFile`, `WikipediaData.filePath` and `WikipediaData.parse`
+  //This is a test
   val wikiRdd: RDD[WikipediaArticle] = sc.textFile(WikipediaData.filePath)
     .map(line => WikipediaData.parse(line))
 
